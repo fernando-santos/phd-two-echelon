@@ -1,0 +1,85 @@
+
+Log started (V12.4.0.0) Fri May 18 18:44:40 2012
+
+
+Problem 'raiz.lp' read.
+Read time =    0.09 sec.
+Tried aggregator 1 time.
+LP Presolve eliminated 0 rows and 2 columns.
+Reduced LP has 31 rows, 136 columns, and 942 nonzeros.
+Presolve time =    0.06 sec.
+Initializing dual steep norms . . .
+
+Iteration log . . .
+Iteration:     1   Dual objective     =            88.362888
+
+Dual simplex - Optimal:  Objective =  3.9921849870e+02
+Solution time =    0.10 sec.  Iterations = 35 (0)
+Deterministic time = 0.37 ticks  (3.64 ticks/sec)
+
+
+Variable Name           Solution Value
+lbd_1                         2.000000
+gam_2_34                      1.000000
+gam_1_49                      0.500000
+gam_2_49                      1.000000
+gam_1_62                      0.500000
+gam_1_63                      1.000000
+del_1_1                   11000.000000
+del_2_0                   11500.000000
+All other variables in the range 1-138 are 0.
+
+Log started (V12.4.0.0) Tue Jun 19 00:44:57 2012
+
+
+Problem 'm1.lp' read.
+Read time =    0.11 sec.
+
+Log started (V12.4.0.0) Tue Jun 19 01:01:26 2012
+
+
+Problem 'm1.lp' read.
+Read time =    0.03 sec.
+Tried aggregator 1 time.
+LP Presolve eliminated 14 rows and 29 columns.
+Reduced LP has 209 rows, 772 columns, and 35439 nonzeros.
+Presolve time =    0.05 sec.
+Initializing dual steep norms . . .
+
+Iteration log . . .
+Iteration:     1   Dual objective     =            35.488281
+Iteration:    62   Dual objective     =           344.848536
+Iteration:   124   Dual objective     =           436.163040
+Iteration:   186   Dual objective     =           472.506653
+Iteration:   248   Dual objective     =           488.764476
+Iteration:   310   Dual objective     =           496.539940
+Iteration:   372   Dual objective     =           501.372510
+Iteration:   434   Dual objective     =           503.467931
+Iteration:   501   Dual objective     =           504.299547
+Iteration:   567   Dual objective     =           504.510032
+
+Dual simplex - Optimal:  Objective =  5.0451467478e+02
+Solution time =    0.21 sec.  Iterations = 585 (0)
+Deterministic time = 63.61 ticks  (306.37 ticks/sec)
+
+
+Log started (V12.4.0.0) Tue Jun 19 01:01:48 2012
+
+
+Problem 'm2.lp' read.
+Read time =    0.01 sec.
+Tried aggregator 1 time.
+LP Presolve eliminated 54 rows and 37 columns.
+Reduced LP has 169 rows, 146 columns, and 4758 nonzeros.
+Presolve time =    0.00 sec.
+Initializing dual steep norms . . .
+
+Iteration log . . .
+Iteration:     1   Dual objective     =           197.765271
+Iteration:    62   Dual objective     =           454.480145
+Iteration:   124   Dual objective     =           501.679964
+
+Dual simplex - Optimal:  Objective =  5.0451467478e+02
+Solution time =    0.03 sec.  Iterations = 183 (0)
+Deterministic time = 6.28 ticks  (222.24 ticks/sec)
+

@@ -1,0 +1,71 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[brazil]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\geometry{letterpaper,left=2.5cm,right=2.5cm,top=2.0cm,bottom=1.0cm}
+\usepackage{graphicx}
+\sloppy
+
+\begin{document}
+
+\noindent\textbf{Dados do problema:}
+\begin{table}[!htb]
+\begin{tabular}{cl}
+\vspace{1mm}
+$V = \{0, V_s, V_c\}$ & $V_s$ e $V_c$ s\~ao conjuntos dos v\'ertices satellities e customers, respectivamente \\
+$K_1$ & Conjunto de ve\'iculos dispon\'ivel para o $1^o$ n\'ivel de roteamento \\
+$K_2$ & Conjunto de ve\'iculos dispon\'ivel para o $2^o$ n\'ivel de roteamento \\
+$m_s$ & Quantidade m\'axima de ve\'iculos que podem partir do satellite $s$ \\
+$Q_1$ & Capacidade homog\^enea de todos os ve\'iculos do $1^o$ n\'ivel de roteamento \\
+$Q_2$ & Capacidade homog\^enea de todos os ve\'iculos do $2^o$ n\'ivel de roteamento \\
+$d_i$ & demanda do customer $i$ \\
+$a_{ir}$ & Par\^ametro que indica se a rota $r$ passa (assume valor $1$) no v\'ertice $i$ ou n\~ao \\
+$T_s$ & Custo unit\'ario para carregar/descarregar mercadorias no satellite $s$
+\end{tabular}
+\end{table}
+
+\noindent\textbf{Vari\'aveis de decis\~ao:}
+\begin{table}[!htb]
+\begin{tabular}{rl}
+\vspace{1mm}
+$\lambda_{r_1} = $ & N\'umero de ve\'iculos que executam a rota $r$ de n\'ivel 1\\
+\vspace{2mm}
+$\delta^{sr_1} = $ & Quantidade de mercadorias recebida pelo satellite $s$ pela rota $r$ de nivel 1 \\
+\vspace{2mm}
+$\gamma^s_{r_2} = $ &
+$\left\{
+\begin{array} {l}
+1 - \textrm{ A rota } r \textrm{ de nivel 2 que parte do satellite } s \textrm{ para atender os consumidores \'e usada } \\
+0 - \textrm{ Caso contr\'ario}
+\end{array} \right.
+$
+\end{tabular}
+\end{table}
+
+\noindent\textbf{Modelo:}
+\vspace{5mm}
+$$\min \,\, \sum\limits_{r_1 \in R_1} {c_{r_1} \lambda_{r_1}} + \sum\limits_{s \in V_s} {\sum\limits_{r_2 \in R_2}{c_{r_2} \gamma^s_{r_2}}} + \sum\limits_{s \in V_s} { \sum\limits_{r_1 \in R_1} T_s \delta^{sr_1} }$$
+\begin{eqnarray}
+\label{primal01}
+  \sum\limits_{ r_1 \in R_1 } { \lambda_{r_1} } \le |K_1| \\
+\label{primal02}
+  \sum\limits_{ s \in V_s } { \sum\limits_{ r_2 \in R_2 } { \gamma^s_{r_2} } } \le |K_2| \\
+\label{primal03}
+  \sum\limits_{ r_2 \in R_2 } { \gamma^s_{r_2} } \le m_s & \hspace{1cm} & \forall s \in V_s \\
+\label{primal04}
+  \sum\limits_{ s \in V_s } { \sum\limits_{ r_2 \in R_2 } { a_{ir_2} \gamma^s_{r_2} } } = 1 & \hspace{1cm} & \forall i \in V_c \\
+\label{primal05}
+  \sum\limits_{ r_2 \in R_2 } { \gamma^s_{r_2} \sum\limits_{ i \in V_c }{ a_{ir_2} d_i } } = \sum\limits_{ r_1 \in R_1 }{\delta^{sr_1}} & \hspace{1cm} & \forall s \in V_s \\
+\label{primal06}
+  \sum\limits_{ s \in S } { a_{sr_1} \delta^{sr_1} \leq Q_1 \lambda_{r_1} } & \hspace{1cm} & \forall r_1 \in R_1 \\
+\label{primal07}
+  \sum\limits_{ r_1 \in R_1 } { \sum\limits_{ s \in V_s } { (1-a_{sr_1})\delta^{sr_1} } } = 0 \\
+\label{primal08}
+  \lambda \in \mathbb{B}^{|R_1|}, \gamma \in \mathbb{B}^{|V_s||R_2|}, \delta \in \mathbb{N}^{|V_s||R_1|}
+\end{eqnarray}
+
+\end{document}

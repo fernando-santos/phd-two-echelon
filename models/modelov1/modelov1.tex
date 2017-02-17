@@ -1,0 +1,103 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[brazil]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\geometry{letterpaper,left=2.5cm,right=2.5cm,top=2.0cm,bottom=1.0cm}
+\usepackage{graphicx}
+\sloppy
+
+\begin{document}
+
+\noindent\textbf{Dados do problema:}
+\begin{table}[!htb]
+\begin{tabular}{cl}
+\vspace{1mm}
+$V = \{0, V_s, V_c\}$ & $V_s$ e $V_c$ s\~ao conjuntos dos v\'ertices satellities e customers, respectivamente \\
+$K_1$ & Conjunto de ve\'iculos dispon\'ivel para o $1^o$ n\'ivel de roteamento \\
+$K_2$ & Conjunto de ve\'iculos dispon\'ivel para o $2^o$ n\'ivel de roteamento \\
+$m_s$ & Quantidade m\'axima de ve\'iculos que podem partir do satellite $s$ \\
+$Q_1$ & Capacidade homog\^enea de todos os ve\'iculos do $1^o$ n\'ivel de roteamento \\
+$Q_2$ & Capacidade homog\^enea de todos os ve\'iculos do $2^o$ n\'ivel de roteamento \\
+$d_i$ & demanda do customer $i$ \\
+$a_{ir}$ & Par\^ametro que indica se a rota $r$ passa (assume valor $1$) no v\'ertice $i$ ou n\~ao \\
+$T_s$ & Custo unit\'ario para carregar/descarregar mercadorias no satellite $s$
+\end{tabular}
+\end{table}
+
+\noindent\textbf{Vari\'aveis de decis\~ao:}
+\begin{table}[!htb]
+\begin{tabular}{rl}
+\vspace{1mm}
+$\lambda^k_r = $ &
+$\left\{
+\begin{array} {l}
+1 - \textrm{ A rota } r \textrm{ associada ao veculo } k \textrm{ \'e usada para levar items de 0 aos satellites } \\
+0 - \textrm{ Caso contr\'ario}
+\end{array} \right.
+$
+\\
+\vspace{2mm}
+$\gamma^k_r = $ &
+$\left\{
+\begin{array} {l}
+1 - \textrm{ A rota } r \textrm{ que parte do satellite } s \textrm{ para atender aos customers \'e usada } \\
+0 - \textrm{ Caso contr\'ario}
+\end{array} \right.
+$
+\\
+\vspace{1mm}
+$\delta^{sk} = $ & Quantidade (inteira) de mercadorias recebida pelo satellite $s$ do ve\'iculo $k$
+\end{tabular}
+\end{table}
+
+\noindent\textbf{Modelo:}
+\vspace{5mm}
+$$\min \,\, \sum\limits_{r \in R_1} {\sum\limits_{k \in K_1}{c_{r_1} \lambda^k_r}} + \sum\limits_{s \in V_s} {\sum\limits_{r \in R_2}{c_{r_2} \gamma^s_r}} + \sum\limits_{s \in V_s} { \sum\limits_{k \in K_1} T_s \delta^{sk} }$$
+\begin{eqnarray}
+\label{primal01}
+  \sum\limits_{ k \in K_1 } { \sum\limits_{ r \in R_1 } { \lambda^k_r } } \le |K_1| \\
+\label{primal02}
+  \sum\limits_{ s \in V_s } { \sum\limits_{ r \in R_2 } { \gamma^s_r } } \le |K_2| \\
+\label{primal03}
+  \sum\limits_{ r \in R_2 } { \gamma^s_r } \le m_s & \hspace{1cm} & \forall s \in V_s \\
+\label{primal04}
+  \sum\limits_{ s \in V_s } { \sum\limits_{ r \in R_2 } { a_{ir} \gamma^s_r } } = 1 & \hspace{1cm} & \forall i \in V_c \\
+\label{primal05}
+  \sum\limits_{ r \in R_2 } { \gamma^s_r \sum\limits_{ i \in V_c }{ a_{ir} d_i } } = \sum\limits_{ k \in K_1 } { \delta^{sk} } & \hspace{1cm} & \forall s \in V_s \\
+\label{primal06}
+  \delta^{sk} \le Q_1 \sum\limits_{ r \in R_1 } { a_{sr} \lambda^k_r } & \hspace{1cm} & \forall s \in V_s, \forall k \in K_1 \\
+\label{primal07}
+  \sum\limits_{ s \in V_s } { \delta^{sk} } \le Q_1 & \hspace{1cm} & \forall k \in K_1 \\
+\label{primal08}
+  \lambda \in \mathbb{B}^{|K_1||R_1|}, \gamma \in \mathbb{B}^{|V_s||R_2|}, \delta \in \mathbb{N}^{|V_s||K_1|}
+\end{eqnarray}
+
+\newpage
+Considerando o modelo $(1)$-$(8)$ com um conjunto restrito de rotas $\hat{R_2}$ e relaxando a integralidade das vari\'aveis \'e poss\'ivel associar as seguintes vari\'aveis duais \'otimas e obter o modelo dual $(9)$-$(12)$.
+
+\begin{center}
+\begin{tabular}{lllllll}
+$\alpha \rightarrow (1)$ & & $\beta \rightarrow (2)$ & & $\theta \rightarrow (3)$ & & $\mu \rightarrow (4)$ \\
+$\pi \rightarrow (5)$ & & $\chi \rightarrow (6)$ & & $\psi \rightarrow (7)$ & & $\rho \rightarrow (8)$
+\end{tabular}
+\end{center}
+
+\vspace{5mm}
+$$\max \,\, |K_1|\alpha + |K_2|\beta + \sum\limits_{s \in V_s}{m_s \theta^s} + \sum\limits_{i \in V_c}{ \mu_i }  + Q_1 \sum\limits_{k \in K_1}{ \psi^k }$$
+\begin{eqnarray}
+\label{dual01}
+  \alpha - Q_1 \sum\limits_{s \in V_s}{a_{sr} \chi^{sk}} \le c_r & \hspace{1cm} & \forall k \in K_1, \forall r \in R_1 \\
+\label{dual02}
+  \beta + \theta_s + \sum\limits_{i \in V_c}{a_{ir} \mu_i} + \sum\limits_{i \in V_c}{a_{ir} d_i \pi^s} + \sum\limits_{X \subset V_c} { a_{Xr} \rho^X } \le c_r & & \forall s \in V_s, \forall r \in \hat{R_2} \\
+\label{dual03}
+  - \pi^s + \chi^{sk} + \psi^k \le T_s & \hspace{1cm} & \forall s \in V_s, \forall k \in K_1 \\
+\label{dual04}
+  \alpha \in \mathbb{R_-}, \hspace{3mm} \beta \in \mathbb{R_-}, \hspace{3mm} \theta^{|V_s|} \in \mathbb{R_-}, \hspace{3mm} \mu^{|V_c|} \in \mathbb{R}\\
+  \pi^{|V_s|} \in \mathbb{R}, \hspace{3mm} \chi^{|V_s||K_1|} \in \mathbb{R_-}, \hspace{3mm} \psi^{|K_1|} \in \mathbb{R_-} \nonumber
+\end{eqnarray}
+
+\end{document}
